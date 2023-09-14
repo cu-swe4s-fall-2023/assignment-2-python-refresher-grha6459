@@ -10,6 +10,6 @@ def get_column(file_name, query_column, query_value, result_column):
             # Split separated the string by commas
             #items is a list data type
             items = line.strip().split(',')
-            if items[query_column] == query_value:
-                result_list.append(items[result_column])
+            if items[query_column-1] == query_value:
+                result_list.append(items[result_column-1])
     return np.array(result_list)
