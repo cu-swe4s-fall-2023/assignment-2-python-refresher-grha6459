@@ -6,7 +6,9 @@ def get_column(file_name, query_value, result_column, query_column=1):
     :param result_column: The number (beginning with one) of the column to be returned, in part
     :param query_column: The number (beginning with one) of the column to be returned, in part, default value of one
     :return: a list of the numbers found in the result_column, if non-numerical values are found, will include NaN
+             if issues are with file handelong encountered, function will  return None
     """
+    # Following Variable (file) is only used as a test, open() is run again below
     file = None
     try:
         file = open(file_name)
