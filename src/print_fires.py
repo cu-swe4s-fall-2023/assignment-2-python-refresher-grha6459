@@ -32,12 +32,26 @@ def main():
                         help='filename to read from',
                         required=True)
 
+    parser.add_argument('--operation',
+                        type=str,
+                        help='operation to perform on values, must be either mean, median, or standard_deviation',
+                        required=False)
+
     args = parser.parse_args()
     # Following uses the arguments returned by the parser for a function call
     fires = my_utils.get_column(args.file_name, args.country, args.fires_column, query_column=args.country_column)
-    if fires:  # if fires is None (as indicates an error), this conditional is false
+    if fires.size == 0:
+        sys.exit(1)  # Exit code updated to reflect that an error was encountered and no values read
+    elif args.operation is None:
         print(fires)
-    else:
+    elif args.operation == 'mean':
+        print(my_utils.get_mean(fires))  # I'm still printing this, returning from main seems unnecessary
+    elif args.operation == 'median':
+        print(my_utils.get_median(fires))
+    elif args.operation == 'standard_deviation':
+        print(my_utils.get_std_dev(fires))
+    else:  # if fires is None (as indicates an error), this conditional is false
+        print("Error encountered. Check if operation is set to mean, median, or standard_deviation")
         sys.exit(1)  # Exit code updated to reflect that an error was encountered
 
 
