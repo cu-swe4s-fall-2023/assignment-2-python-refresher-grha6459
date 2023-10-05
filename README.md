@@ -2,14 +2,15 @@
 # Printing Fires with Blazing Efficiency and Undeniable Panache
 ## Overview
 print_fires.py takes a filename, a query column number, a query value, and a result column number. column numbers are natural numbers, *not* indices. The intended use employs a country name as the query value. Using the function get_column defined in my_utils.py, it opens the file given by the file name, and filters the values in the results column to only those whose corresponding value is the query column matches the query value. Note that the file must be formatted as a csv, included in the current directory. These values are truncated to integers if possible, but if non-numeric values are found, the returned/printed list will include Nan (type float) values.
+If the --operation parameter is included, print_fires will instead return the mean, median or standard deviation of the values.
 ## Example Usage
-The parameters are named and given via the command line. See run.sh for an examples of a terminal command to run (and two examples of incorrect usage). For an example using all four command line arguments (including a value specified for country_column, the only one with a built-in default), see below: <br>
+The parameters are named and given via the command line. See test_my_utils.py for example function runs.
 ```
 python print_fires.py --country 'United States of America' --country_column 1 --fires_column 4 --file_name 'Agrofood_co2_emission.csv'
 ```
-This prints the integer number of fires in the specified country, each year.
+This prints the integer number of fires in the specified country, each year. 
+If the file is unable to be opened, or an empty array is read from it, error codes are set to 1 and an error message may be displayed.
+If non-numeric values are in the queried column, the statistical functions will return None.
 
-What follows is another example using the same files and arguments, but an alternative query value and corresponding column number to print integer list of fires taking place in a specified year:
-```
-python print_fires.py --country '1998' --country_column 2 --fires_column 4 --file_name 'Agrofood_co2_emission.csv'
-```
+Unit and functional testing have also been added in the testing directory. The test_my_utils.py file creates a class to test the statistical capabilities.
+Finally, functional testing using the Stupid Simple Bash Testing framework (see here for more detail: https://github.com/ryanlayer/ssshtest). A test csv file has been added to this directory in the test_data subdirectory.
