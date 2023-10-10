@@ -11,15 +11,15 @@ assert_stdout 1558
 assert_exit_code 0
 
 # Following will finish with exit code 1, wrong file error
-run unopened_file_test ../../src/python print_fires.py --country 'United States of America' --fires_column 4 --file_name 'WRONG' --operation 'median'
+run unopened_file_test python ../../src/print_fires.py --country 'United States of America' --fires_column 4 --file_name 'not_correct_filename' --operation 'median'
 assert_exit_code 1
 
 # Following should return None, but doesn't change error code
-run NaN_Value_test ../../src/python print_fires.py --country 'Zimbabwe' --fires_column 4 --file_name 'test_data/test_data.csv' --operation 'mean'
+run NaN_Value_test python ../../src/print_fires.py --country 'Zimbabwe' --fires_column 4 --file_name 'test_data/test_data.csv' --operation 'mean'
 assert_stdout None
 assert_exit_code 0
 
 # Operation spelled incorrectly, checks if "Error encountered..." message is output and error code updated
-run incorrect_op_test ../../src/python print_fires.py --country 'United States of America' --fires_column 4 --file_name 'test_data/test_data.csv' --operation 'fdsfdfds'
+run incorrect_op_test python ../../src/print_fires.py --country 'United States of America' --fires_column 4 --file_name 'test_data/test_data.csv' --operation 'fdsfdfds'
 assert_stdout Error encountered
 assert_exit_code 1
