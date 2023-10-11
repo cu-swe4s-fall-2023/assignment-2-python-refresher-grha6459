@@ -13,4 +13,6 @@ If the file is unable to be opened, or an empty array is read from it, error cod
 If non-numeric values are in the queried column, the statistical functions will return None.
 
 Unit and functional testing have also been added in the testing directory. The test_my_utils.py file creates a class to test the statistical capabilities.
-Finally, functional testing using the Stupid Simple Bash Testing framework (see here for more detail: https://github.com/ryanlayer/ssshtest). A test csv file has been added to this directory in the test_data subdirectory.
+Finally, functional testing using the Stupid Simple Bash Testing framework (see here for more detail: https://github.com/ryanlayer/ssshtest). A test csv file has been added to this directory in the test_data subdirectory. 
+
+Automated testing has been added to the github. The file test.yml specifies tests to be run, including running test_my_utils.py, test_print_fires.sh, and a check of PEP8 compliance. test.yml uses an environment, named swe4s. This environment is specified in the file environment.yml, which resides in the main directory. 
