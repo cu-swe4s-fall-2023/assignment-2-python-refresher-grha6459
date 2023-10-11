@@ -45,4 +45,4 @@ jobs:
           environment-file: environment.yml
       - run: |
           cd testing/functional_testing
-          test_print_fires.sh
+          bash test_print_fires.sh
