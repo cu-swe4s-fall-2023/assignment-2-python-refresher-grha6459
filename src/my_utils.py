@@ -51,7 +51,7 @@ def get_mean(int_array):
     :param int_array: A 1D numpy array of integers
     :return: The arithmetic mean of the array of integers, calculated using np
     Notes:
-    If array is empty, or
+    If array is empty, or contains Nan, function returns None
     """
     if np.shape(int_array)[0] == 0:
         return None
@@ -65,7 +65,8 @@ def get_median(int_array):
     """
     :param int_array: A 1D numpy array of integers
     :return: The median of the array of integers, as calculated using numpy
-
+    Notes:
+    If array is empty, or contains Nan, function returns None
     """
     if np.shape(int_array)[0] == 0:
         return None
@@ -79,7 +80,9 @@ def get_std_dev(int_array):
     """
     :param int_array: A 1D numpy array of integers
     :return: The standard deviation of the array of integers, as calculated
-    using numpy a
+    using numpy
+    Notes:
+    If array is empty, or contains Nan, function returns None
     """
     if np.shape(int_array)[0] == 0:
         return None
