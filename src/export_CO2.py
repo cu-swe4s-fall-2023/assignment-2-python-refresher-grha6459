@@ -1,8 +1,9 @@
 import my_utils
 import argparse
 import sys
-#Following is reundant with my_utils, but snakemake throwung an error otherwise
+# Following is redundant with my_utils, but throws error otherwise
 import numpy as np
+
 
 # The purpose of this file is the use of my_utils.py to extract multiple
 # columns and export the result as a csv
@@ -44,12 +45,12 @@ def main():
     args = parser.parse_args()
     # Following uses the arguments returned by the parser for a function call
     # def get_column(file_name, query_value, result_column, query_column=1)
-    #Years hardcoded as first column of csv
-    #args.file_name
+    # Files for individual countries are indexed by year
+    index_column_number = 2
     years = my_utils.get_column(args.file_name, args.country,
-                               2,
-                               query_column=args.country_column)
-    # Following unpacks the column numbers to stack arrays
+                                index_column_number,
+                                query_column=args.country_column)
+    # Following iterates the column numbers to stack arrays
     combined_array = years  # At this point combined array is 1D
     for i in args.column_numbers:
         # New array created using column number where we used fires_column
@@ -70,6 +71,7 @@ def main():
     else:
         # Export the combined array to a CSV file
         np.savetxt(csv_file, combined_array, delimiter=',')
+
 
 # Main function added
 if __name__ == "__main__":
