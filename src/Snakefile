@@ -1,0 +1,36 @@
+COUNTRY1 = "United States of America"
+COUNTRY2 = "Uruguay"
+
+rule all:
+  input:
+    "fig1.png",
+    "fig2.png",
+    "fig3.png",
+
+rule make_figure:
+  input:
+    COUNTRY1+"_processed.csv",
+    COUNTRY2+"_processed.csv"
+  output:
+    "fig1.png",
+    "fig2.png",
+    "fig3.png",
+  shell:
+    "python process_and_plot.py"
+
+rule process_data:
+  input:
+    "Argrofood_co2_emission.csv"
+  output:
+    COUNTRY1+"_processed.csv",
+    COUNTRY2+"_processed.csv"
+  run:
+  # getting columns 26-urban population 27-rural population 30-total emissions 9-food transport 12-food consumption 
+    shell("python export_CO2.py --country 'United States of America' --file_name 'Argrofood_co2_emission.csv' --column_numbers 26 27 30 9 12")
+    shell("python export_CO2.py --country 'Uruguay' --file_name 'Argrofood_co2_emission.csv' --column_numbers 26 27 30 9 12")
+    
+rule get_data:
+  output:
+    "Argrofood_co2_emission.csv"
+  shell: 
+    "wget -O Argrofood_co2_emission.csv 'https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr'"
